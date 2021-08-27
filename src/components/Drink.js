@@ -29,9 +29,9 @@ export default function Drink() {
     ]
     return (
         <div class="menu drink">
-            {options.map((option) => {
+            {options.map((option, index) => {
                 const {img, name, detail, price} = option;
-                return <Option option={option}></Option>
+                return <Option key={index} option={option}></Option>
             })}
         </div>
     );
