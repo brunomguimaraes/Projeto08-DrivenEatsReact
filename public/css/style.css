@@ -98,7 +98,7 @@
     margin-top: 8px;
 }
 
-.option ion-icon {
+.option .amount {
     display: none;
 }
 
@@ -211,13 +211,22 @@
     position: relative;
 }
 
-.selected ion-icon {
+.selected .amount {
     display: initial;
     position: absolute;
-    bottom: 8px;
+    bottom: 4px;
     right: 4px;
-    font-size: 20px;
+    font-size: 16px;
+}
+
+.selected .amount .minus {
+    color: #CF2B2B;
+    margin-right: 5px;
+}
+
+.selected .amount .plus {
     color: #32B72F;
+    margin-left: 5px;
 }
 
 .blur-background {
