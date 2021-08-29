@@ -1,6 +1,6 @@
 import Option from "./generics/Option";
 
-export default function Desert({desert, setDesert, desertPrice, setDesertPrice}) {
+export default function Desert({desert, setDesert, desertPrice, setDesertPrice, displayButton}) {
     const options = [
         {
             img: "media/alfenim.jpg",
@@ -31,7 +31,7 @@ export default function Desert({desert, setDesert, desertPrice, setDesertPrice})
         <div class="menu desert">
             {options.map((option, index) => {
                 const {img, name, detail, price} = option;
-                return <Option key={index} option={option} item={desert} setItem={setDesert} itemPrice={desertPrice} setItemPrice={setDesertPrice}></Option>
+                return <Option key={index} option={option} item={desert} setItem={setDesert} itemPrice={desertPrice} setItemPrice={setDesertPrice} displayButton={displayButton}></Option>
             })}
         </div>
     );

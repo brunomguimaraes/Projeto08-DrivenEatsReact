@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Option(props) {
     const {img, name, detail, price} = props.option;
-    const {item, setItem, itemPrice, setItemPrice} = props;
+    const {item, setItem, itemPrice, setItemPrice, displayButton} = props;
     const [selected, setSelected] = useState("");
     const [amount, setAmount] = useState(1);
+    useEffect(() => displayButton());
 
     const select = () => {
         if (selected === "") {
             setSelected("selected")
             setItem(arr => [...arr, name]);
             setItemPrice(arr => [...arr, Number(price.replace(",", "."))]);
-            console.log(item, itemPrice);
         }
     }
 
