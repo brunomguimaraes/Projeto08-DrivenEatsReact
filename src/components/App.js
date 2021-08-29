@@ -1,7 +1,6 @@
-import TopBar from "./TopBar";
-import Container from "./Container";
-import Order from "./Order";
-import BottomBar from "./BottomBar";
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
 import { useState } from "react";
 
 export default function App() {
@@ -68,18 +67,18 @@ export default function App() {
 
 
     return (
-        <div>   
-            <TopBar/>
-            <Container 
-            food={food} setFood={setFood} 
-            foodPrice={foodPrice} setFoodPrice={setFoodPrice}
-            drink={drink} setDrink={setDrink}
-            drinkPrice={drinkPrice} setDrinkPrice={setDrinkPrice} 
-            desert={desert} setDesert={setDesert}
-            desertPrice={desertPrice} setDesertPrice={setDesertPrice} 
-            displayButton={displayButton}/>
-            <Order />
-            <BottomBar orderSelected={orderSelected} completeOrder={completeOrder} />
-        </div>
+        <>   
+            <Header/>
+            <Main 
+                food={food} setFood={setFood} 
+                foodPrice={foodPrice} setFoodPrice={setFoodPrice}
+                drink={drink} setDrink={setDrink}
+                drinkPrice={drinkPrice} setDrinkPrice={setDrinkPrice} 
+                desert={desert} setDesert={setDesert}
+                desertPrice={desertPrice} setDesertPrice={setDesertPrice} 
+                displayButton={displayButton}
+            />
+            <Footer orderSelected={orderSelected} completeOrder={completeOrder} />
+        </>
     );
 }
