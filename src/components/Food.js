@@ -1,6 +1,6 @@
 import Option from "./generics/Option";
 
-export default function Food() {
+export default function Food({food, setFood, foodPrice, setFoodPrice}) {
     const options = [
         {
             img: "media/baiao.jpg",
@@ -31,7 +31,7 @@ export default function Food() {
         <div class="menu food">
             {options.map((option, index) => {
                 const {img, name, detail, price} = option;
-                return <Option key={index} option={option}></Option>
+                return <Option key={index} option={option} item={food} setItem={setFood} itemPrice={foodPrice} setItemPrice={setFoodPrice}></Option>
             })}
         </div>
     );

@@ -2,25 +2,42 @@ import { useState } from "react";
 
 export default function Option(props) {
     const {img, name, detail, price} = props.option;
+    const {item, setItem, itemPrice, setItemPrice} = props;
     const [selected, setSelected] = useState("");
     const [amount, setAmount] = useState(1);
 
     const select = () => {
         if (selected === "") {
-            setSelected("selected");
+            setSelected("selected")
+            setItem(arr => [...arr, name]);
+            setItemPrice(arr => [...arr, Number(price.replace(",", "."))]);
+            console.log(item, itemPrice);
         }
     }
 
     const decreaseAmount = () => {
         if (amount === 1) {
             setSelected("");
+            setItem(item.filter(option => option !== name));
+            setItemPrice(itemPrice.filter(optionPrice => optionPrice !== Number(price.replace(",", "."))));
         } else {
             setAmount(amount - 1);
+            const index = item.findIndex(option => option === name);
+            setItem([
+                ...item.slice(0, index), 
+                ...item.slice(index + 1)
+            ]);
+            setItemPrice([
+                ...itemPrice.slice(0, index), 
+                ...itemPrice.slice(index + 1)
+            ]);
         }
     }
 
     const increaseAmount = () => {
         setAmount(amount + 1);
+        setItem(arr => [...arr, name]);
+        setItemPrice(arr => [...arr, Number(price.replace(",", "."))]);
     }
 
     return (
