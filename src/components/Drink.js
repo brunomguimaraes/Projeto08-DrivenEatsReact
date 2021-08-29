@@ -28,7 +28,7 @@ export default function Drink({drink, setDrink, drinkPrice, setDrinkPrice, displ
         }
     ]
     return (
-        <div class="menu drink">
+        <div className="menu drink">
             {options.map((option, index) => {
                 const {img, name, detail, price} = option;
                 return <Option key={index} option={option} item={drink} setItem={setDrink} itemPrice={drinkPrice} setItemPrice={setDrinkPrice} displayButton={displayButton}></Option>

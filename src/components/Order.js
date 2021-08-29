@@ -1,23 +1,23 @@
 export default function Order() {
     return (
-        <div class="confirm-order hide">
-        <p class="title">Confirme seu pedido</p>
-        <div class="order">
-           <div class="items">
+        <div className="confirm-order hide">
+        <p className="title">Confirme seu pedido</p>
+        <div className="order">
+           <div className="items">
                 <p>Food</p>
                 <p>Drink</p>
                 <p>Desert</p>
-                <p class="bold">Total</p>
+                <p className="bold">Total</p>
            </div>
-           <div class="prices">
+           <div className="prices">
                 <p>FoodPrice</p>
                 <p>DrinkPrice</p>
                 <p>DesertPrice</p>
-                <p class="bold">R$ TotalPrice</p>
+                <p className="bold">R$ TotalPrice</p>
            </div>
         </div>
-        <button class="end-order" onclick="Whatsapp()">Tudo certo, pode pedir!</button>
-        <button class="cancel-order">Cancelar</button>
+        <button className="end-order">Tudo certo, pode pedir!</button>
+        <button className="cancel-order">Cancelar</button>
     </div>
     );
 }
