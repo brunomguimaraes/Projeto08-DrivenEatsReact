@@ -1,7 +1,13 @@
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
+import Order from "./Order";
 import { useState } from "react";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+  } from "react-router-dom";
 
 export default function App() {
     const [food, setFood] = useState([]);
@@ -10,8 +16,8 @@ export default function App() {
     const [drinkPrice, setDrinkPrice] = useState([]);
     const [desert, setDesert] = useState([]);
     const [desertPrice, setDesertPrice] = useState([]);
-
     const [orderSelected, setOrderSelected] = useState("not-selected");
+    let finalOrder = {};
 
     const displayButton = () => {
         if (food.length > 0 && drink.length > 0 && desert.length > 0) {    
@@ -22,17 +28,15 @@ export default function App() {
     }
 
     const calculatePrice = () => {
-        const foodTotal = foodPrice.reduce((sum, number) => sum + number);
-        const drinkTotal = drinkPrice.reduce((sum, number) => sum + number);
-        const desertTotal = desertPrice.reduce((sum, number) => sum + number);
-        const totalPrice = foodTotal + drinkTotal + desertTotal;
-        return totalPrice.toFixed(2);
+        finalOrder.foodPrice = foodPrice.reduce((sum, number) => sum + number).toFixed(2);
+        finalOrder.drinkPrice = drinkPrice.reduce((sum, number) => sum + number).toFixed(2);
+        finalOrder.desertPrice = desertPrice.reduce((sum, number) => sum + number).toFixed(2);
+        finalOrder.totalPrice = (Number(finalOrder.foodPrice) + Number(finalOrder.drinkPrice) + Number(finalOrder.desertPrice)).toFixed(2);
     }
 
     const printOrder = (section) => {
         const items = section.sort();
         const order = {};
-        console.log(items, order);
         for (let i = 0; i < items.length; i++) {
             if (i !== 0) {
                 if (items[i] === items[i - 1]) {
@@ -55,30 +59,50 @@ export default function App() {
     }
 
     const completeOrder = () => {
-        const totalPrice = calculatePrice();
-        const foodOrder = printOrder(food);
-        const drinkOrder = printOrder(drink);
-        const desertOrder = printOrder(desert);
+        calculatePrice();
+        finalOrder.food = printOrder(food);
+        finalOrder.drink = printOrder(drink);
+        finalOrder.desert = printOrder(desert);
+    }
 
+    const whatsapp = (foodOrder, drinkOrder, desertOrder, totalPrice) => {
         const message = `Olá, gostaria de fazer o pedido:\n- Prato:${foodOrder}\n- Bebida:${drinkOrder}\n- Sobremesa:${desertOrder}\nTotal: R$ ${totalPrice}`;
         const link = "https://wa.me/5519981266625?text=" + encodeURIComponent(message);
         window.location = link;
     }
 
+    const cancelOrder = () => {
+        setFood([]);
+        setFoodPrice([]);
+        setDrink([]);
+        setDrinkPrice([]);
+        setDesert([]);
+        setDesertPrice([]);
+        finalOrder = {};
+        displayButton();
+    }
 
     return (
-        <>   
-            <Header/>
-            <Main 
-                food={food} setFood={setFood} 
-                foodPrice={foodPrice} setFoodPrice={setFoodPrice}
-                drink={drink} setDrink={setDrink}
-                drinkPrice={drinkPrice} setDrinkPrice={setDrinkPrice} 
-                desert={desert} setDesert={setDesert}
-                desertPrice={desertPrice} setDesertPrice={setDesertPrice} 
-                displayButton={displayButton}
-            />
-            <Footer orderSelected={orderSelected} completeOrder={completeOrder} />
-        </>
+        <Router>
+            <Switch> 
+                <Route exact path="/">
+                    <Header/>
+                    <Main 
+                        food={food} setFood={setFood} 
+                        foodPrice={foodPrice} setFoodPrice={setFoodPrice}
+                        drink={drink} setDrink={setDrink}
+                        drinkPrice={drinkPrice} setDrinkPrice={setDrinkPrice} 
+                        desert={desert} setDesert={setDesert}
+                        desertPrice={desertPrice} setDesertPrice={setDesertPrice} 
+                        displayButton={displayButton}
+                    />
+                    <Footer orderSelected={orderSelected} completeOrder={completeOrder}/>
+                </Route>
+                <Route exact path="/revisar">
+                    <Header/>
+                    <Order cancelOrder={cancelOrder} whatsapp={whatsapp} order={finalOrder}/>
+                </Route> 
+            </Switch> 
+        </Router>
     );
 }

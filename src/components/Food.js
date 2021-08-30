@@ -30,8 +30,17 @@ export default function Food({food, setFood, foodPrice, setFoodPrice, displayBut
     return (
         <div className="menu food">
             {options.map((option, index) => {
-                const {img, name, detail, price} = option;
-                return <Option key={index} option={option} item={food} setItem={setFood} itemPrice={foodPrice} setItemPrice={setFoodPrice} displayButton={displayButton}></Option>
+                return (
+                <Option 
+                    key={index} 
+                    option={option} 
+                    item={food} 
+                    setItem={setFood} 
+                    itemPrice={foodPrice} 
+                    setItemPrice={setFoodPrice} 
+                    displayButton={displayButton}
+                />
+                )
             })}
         </div>
     );

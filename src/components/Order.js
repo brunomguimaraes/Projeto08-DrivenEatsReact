@@ -1,23 +1,24 @@
-export default function Order() {
+import { Link } from "react-router-dom";
+
+export default function Order(props) {
+    const {whatsapp, cancelOrder} = props;
+    const{food, foodPrice, drink, drinkPrice, desert, desertPrice, totalPrice} = props.order;
     return (
-        <div className="confirm-order hide">
-        <p className="title">Confirme seu pedido</p>
+    <div className="confirm-order">
+        <p className="title">Revise seu pedido</p>
         <div className="order">
-           <div className="items">
-                <p>Food</p>
-                <p>Drink</p>
-                <p>Desert</p>
+                <p>{food}</p>
+                <p>{foodPrice}</p>
+                <p>{drink}</p>
+                <p>{drinkPrice}</p>
+                <p>{desert}</p>
+                <p>{desertPrice}</p>
                 <p className="bold">Total</p>
-           </div>
-           <div className="prices">
-                <p>FoodPrice</p>
-                <p>DrinkPrice</p>
-                <p>DesertPrice</p>
-                <p className="bold">R$ TotalPrice</p>
-           </div>
+                <p className="bold">R$ {totalPrice}</p>
         </div>
-        <button className="end-order">Tudo certo, pode pedir!</button>
-        <button className="cancel-order">Cancelar</button>
+        <button className="end-order" onClick={() => whatsapp(food, drink, desert, totalPrice)}>Tudo certo, pode pedir!</button>
+        <Link to="/" className="cancel-order" onClick={cancelOrder}>Cancelar</Link>
+    
     </div>
     );
 }

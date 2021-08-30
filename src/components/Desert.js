@@ -30,8 +30,17 @@ export default function Desert({desert, setDesert, desertPrice, setDesertPrice, 
     return (
         <div className="menu desert">
             {options.map((option, index) => {
-                const {img, name, detail, price} = option;
-                return <Option key={index} option={option} item={desert} setItem={setDesert} itemPrice={desertPrice} setItemPrice={setDesertPrice} displayButton={displayButton}></Option>
+                return (
+                <Option 
+                    key={index} 
+                    option={option} 
+                    item={desert} 
+                    setItem={setDesert} 
+                    itemPrice={desertPrice} 
+                    setItemPrice={setDesertPrice} 
+                    displayButton={displayButton}
+                />
+                )
             })}
         </div>
     );
